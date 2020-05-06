@@ -24,12 +24,6 @@ npm run electron-dev
 
 Now you have a fully functional development version of **litenote**
 
-_If the above did not work [submit an issue](https://github.com/mrbrist/litenote/issues)_
-
-### Contributions
-
-[Submit Issues](https://github.com/mrbrist/litenote/issues)
-
 ### License
 
 **litenote** is licensed with the [MIT](LICENSE) license
