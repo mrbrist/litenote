@@ -1,0 +1,16 @@
+.AppPaper {
+  border-radius: 0 !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  box-shadow: none !important;
+}
+
+.sidebarContainer {
+  /* background-color: rgba(0, 0, 0, 0.03); */
+  width: 240px !important;
+  height: 100vh;
+}
+
+.editorContainer {
+  height: 100vh;
+}
