@@ -21,6 +21,9 @@ function createWindow() {
     minHeight: 539,
     icon: icon,
     name: "litenote",
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
   mainWindow.loadURL(
     isDev
