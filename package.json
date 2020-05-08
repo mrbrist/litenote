@@ -8,10 +8,9 @@
     "@material-ui/icons": "^4.9.1",
     "electron-is-dev": "^1.2.0",
     "ical": "^0.8.0",
-    "ical.js": "^1.4.0",
-    "node-ical": "^0.10.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-electron-titlebar": "^1.0.9",
     "react-scripts": "^3.4.1",
     "typeface-roboto": "0.0.75"
   },

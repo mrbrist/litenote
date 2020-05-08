@@ -15,12 +15,11 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 916,
-    height: 539,
-    minWidth: 916,
-    minHeight: 539,
+    width: 800,
+    height: 560,
     icon: icon,
     name: "litenote",
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
     },
