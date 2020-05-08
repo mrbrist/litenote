@@ -13,7 +13,7 @@ class Editor extends React.Component {
     // console.log(this.props.data);
     return (
       <div className="Editor">
-        <span>{this.props.data.uid}</span>
+        <textarea id="EditorTE"></textarea>
       </div>
     );
   }

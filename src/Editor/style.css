@@ -1,0 +1,13 @@
+#EditorTE {
+  height: calc(98.5vh - 18px);
+  max-height: calc(98.5vh - 18px);
+  width: 98vw;
+  resize: none;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 12pt;
+  outline: none !important;
+  background-color: #fafafa;
+}
