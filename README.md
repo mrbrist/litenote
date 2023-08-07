@@ -4,7 +4,7 @@
 
 # litenote
 
-A modern, simple and beautiful note taking app built with electron and react
+A modern and simple note taking app built with electron and react
 
 ### Setup
 
