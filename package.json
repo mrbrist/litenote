@@ -11,7 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-electron-titlebar": "^1.0.9",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^5.0.1",
     "typeface-roboto": "0.0.75"
   },
   "scripts": {
@@ -40,6 +40,6 @@
     "concurrently": "^5.2.0",
     "electron": "^9.4.0",
     "electron-builder": "^21.2.0",
-    "wait-on": "^3.3.0"
+    "wait-on": "^7.0.1"
   }
 }
