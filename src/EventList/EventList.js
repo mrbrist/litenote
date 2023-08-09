@@ -4,26 +4,21 @@ import "./style.css";
 
 import Event from "../Event/Event";
 
-// start react class
-class EventList extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  // begin react render
-  render() {
-    return (
-      <div className="EventList">
-        {this.props.data.map((event) => {
-          return (
-            <div key={event.uid}>
-              <Event data={event} selectEvent={this.props.selectEvent} />
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+import { Button } from "@material-ui/core";
 
-export default EventList;
+// start react class
+export default function EventList(props) {
+  // begin react render
+  return (
+    <div className="EventList">
+      {props.data.notes.map((note) => {
+        return (
+          <div key={note.id}>
+            <Event data={note} setSelectedNote={props.setSelectedNote} />
+          </div>
+        );
+      })}
+      <Button variant="outlined" onClick={props.newNote} color="primary" className="newNoteButton">New Note</Button>
+    </div>
+  );
+}
