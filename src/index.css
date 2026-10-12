@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   background-clip: padding-box;
   border-width: 2px;
   border-style: solid;
@@ -22,8 +22,14 @@
   user-select: none;
 }
 
+html {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #121212;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -34,4 +40,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Material UI v4 wrapped button text in a label span, and the app's button
+   styling (lowercase text, 18px tall) was applied to that span. v5+ no longer
+   renders it, so buttons wrap their text in this class instead. */
+.buttonLabel {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  text-transform: lowercase;
+  padding-top: 1px;
+  height: 18px !important;
 }

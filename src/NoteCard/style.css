@@ -1,0 +1,15 @@
+.NoteCardPaper {
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 1em;
+  padding: 0.7em;
+}
+
+.noteName {
+  display: block;
+  font-weight: 500;
+}
+
+.NoteCard {
+  cursor: pointer;
+}

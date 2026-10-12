@@ -1,10 +1,9 @@
 .App {
-  border-radius: 0 !important;
   overflow-y: hidden;
-  background-color: #fafafa;
+  background-color: #121212;
 }
 #AppContent {
-  height: calc(100vh - 18px);
-  margin-top: 18px;
+  height: calc(100vh - 36px);
+  margin-top: 36px;
   overflow-y: auto;
 }

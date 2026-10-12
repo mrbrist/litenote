@@ -67,6 +67,11 @@ typings/
 
 # production
 /build
+/dist
+
+# playwright
+/test-results
+/playwright-report
 
 # misc
 .DS_Store

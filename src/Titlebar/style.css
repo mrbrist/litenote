@@ -1,59 +1,49 @@
+/* Height and colour must match TITLEBAR_HEIGHT / TITLEBAR_BACKGROUND in
+   electron/main.js, which sizes and colours the native window controls. */
 .Titlebar {
-  height: 18px;
-  width: 100vw;
   position: fixed;
-  background-color: rgb(228, 229, 233);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   -webkit-app-region: drag;
 }
-#TitleBarControls {
-  display: grid;
-  grid-template-columns: repeat(3, 24px);
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  -webkit-app-region: no-drag;
-}
-#TitleBarControls .button {
-  grid-row: 1 / span 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-#min-button {
-  grid-column: 1;
-}
-#min-button:hover {
-  background-color: rgb(212, 215, 220);
-}
-#max-button {
-  grid-column: 2;
-}
-#max-button:hover {
-  background-color: rgb(212, 215, 220);
-}
-#close-button {
-  grid-column: 3;
-}
-#close-button:hover {
-  background-color: #f04747;
-  color: white;
+
+/* Leave room for the macOS traffic lights on the left... */
+.Titlebar--darwin {
+  padding-left: 80px;
 }
 
-#titleButton {
-  height: 18px !important;
-  position: absolute;
-  left: 45vw;
-  width: 78px !important;
-  padding: 0 !important;
-  z-index: 3001;
-  -webkit-app-region: no-drag;
-  border-radius: 0 !important;
+/* ...and for the Windows / Linux minimise, maximise and close buttons on the
+   right. */
+.Titlebar--win32,
+.Titlebar--linux {
+  padding-right: 148px;
 }
-.MuiButton-label {
-  text-transform: lowercase;
-  padding-top: 1px;
-  height: 18px !important;
+
+.titlebarTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.backButton {
+  -webkit-app-region: no-drag;
+  text-transform: none !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
