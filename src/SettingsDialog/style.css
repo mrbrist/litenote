@@ -1,0 +1,227 @@
+.SettingsDialog {
+  width: min(520px, calc(100% - 32px));
+  max-height: calc(100% - 64px);
+  margin: 16px !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+.SettingsDialog-header,
+.SettingsDialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 12px 20px;
+}
+
+.SettingsDialog-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.SettingsDialog-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.SettingsDialog-footer {
+  border-top: 1px solid var(--border);
+  padding-left: 12px;
+}
+
+.SettingsDialog-body {
+  overflow-y: auto;
+  padding: 4px 20px 16px;
+}
+
+.SettingsSection {
+  padding: 12px 0 8px;
+}
+
+.SettingsSection + .SettingsSection {
+  border-top: 1px solid var(--border);
+}
+
+.SettingsSection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 28px;
+  margin-bottom: 4px;
+}
+
+.SettingsSection h3 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.SettingsReset {
+  margin-right: -6px;
+  font-size: 12px;
+}
+
+.SettingsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+  padding: 4px 0;
+}
+
+.SettingsRow--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.SettingsRow-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.SettingsRow-hint {
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.SettingsNote {
+  margin: 4px 0 0;
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+/* Accent swatches */
+.AccentPicker {
+  display: flex;
+  gap: 6px;
+}
+
+.AccentPicker > button {
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.AccentPicker > button[aria-checked="true"] {
+  border-color: var(--border-strong);
+}
+
+.AccentSwatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--swatch);
+  color: #111318;
+}
+
+/* Font tiles, each previewed in its own font */
+.FontPicker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.FontPicker > button {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease);
+}
+
+.FontPicker > button:hover {
+  border-color: var(--border-strong);
+}
+
+.FontPicker > button[aria-checked="true"] {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.FontPicker-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.FontPicker-name svg {
+  color: var(--accent);
+}
+
+.FontPicker-sample {
+  font-size: 15px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  font-variant-ligatures: var(--font-ligatures);
+}
+
+/* Font size stepper */
+.Stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.Stepper output {
+  min-width: 44px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.SettingsSelect {
+  max-width: 60%;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--bg);
+  cursor: pointer;
+}
+
+.SettingsSelect:hover {
+  border-color: var(--border-strong);
+}
+
+.ShortcutList {
+  margin: 0;
+}
+
+.ShortcutList > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.ShortcutList dt {
+  color: var(--text-muted);
+}
+
+.ShortcutList dd {
+  margin: 0;
+}
+
+@media (max-width: 479.95px) {
+  .FontPicker {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,18 +1,15 @@
 /* Height and colour must match TITLEBAR_HEIGHT / TITLEBAR_BACKGROUND in
    electron/main.js, which sizes and colours the native window controls. */
 .Titlebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  position: relative;
+  flex-shrink: 0;
   box-sizing: border-box;
-  height: 36px;
+  height: var(--titlebar-height);
   display: flex;
   align-items: center;
   padding: 0 8px;
-  background-color: #1e1e1e;
-  /* border-bottom: 1px solid rgba(255, 255, 255, 0.08); */
+  /* No bottom border: it would run into the native window controls. */
+  background-color: var(--bg);
   -webkit-app-region: drag;
 }
 
@@ -28,6 +25,13 @@
   padding-right: 148px;
 }
 
+.TitlebarActions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  -webkit-app-region: no-drag;
+}
+
 .titlebarTitle {
   position: absolute;
   left: 50%;
@@ -36,14 +40,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  color: var(--text-muted);
   pointer-events: none;
 }
 
 .backButton {
-  -webkit-app-region: no-drag;
-  text-transform: none !important;
-  color: rgba(255, 255, 255, 0.87) !important;
+  padding-right: 10px;
+  color: var(--text);
 }

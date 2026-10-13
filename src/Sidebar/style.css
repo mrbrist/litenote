@@ -1,0 +1,71 @@
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+  min-height: 0;
+  border-right: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.SidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 40px;
+  padding: 0 8px 0 18px;
+}
+
+.SidebarTitle {
+  flex: 1;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.SidebarCount {
+  margin-left: 4px;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.SortButton {
+  font-size: 12px;
+}
+
+.SortCheck {
+  display: inline-flex;
+  width: 14px;
+  color: var(--accent);
+}
+
+.SidebarScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.SidebarEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 32px 16px;
+  color: var(--text-muted);
+}
+
+.SidebarEmpty p {
+  margin: 0 0 8px;
+}
+
+/* On narrow windows the list takes the whole window. */
+@media (max-width: 699.95px) {
+  .Sidebar {
+    width: 100%;
+    border-right: none;
+    background-color: var(--bg);
+  }
+}

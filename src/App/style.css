@@ -1,9 +1,187 @@
 .App {
-  overflow-y: hidden;
-  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg);
 }
-#AppContent {
-  height: calc(100vh - 36px);
-  margin-top: 36px;
-  overflow-y: auto;
+
+.AppBody {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.EditorPane {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.EmptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
+  color: var(--text-faint);
+}
+
+.EmptyState p {
+  margin: 0 0 4px;
+  color: var(--text-muted);
+}
+
+.EmptyState kbd {
+  margin-left: 4px;
+  border-color: var(--accent-line);
+  color: inherit;
+}
+
+.LoadError {
+  max-width: 520px;
+  margin: 64px auto;
+  padding: 0 24px;
+}
+
+.LoadError h1 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.LoadError p {
+  color: var(--text-muted);
+}
+
+.LoadError pre {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--danger);
+  white-space: pre-wrap;
+  font: inherit;
+  font-size: 12px;
+}
+
+/* Delete confirmation */
+.ConfirmDialog {
+  width: min(380px, calc(100% - 32px));
+  margin: 16px !important;
+  padding: 20px;
+  border-radius: var(--radius-lg) !important;
+}
+
+.ConfirmDialog h2 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ConfirmDialog p {
+  margin: 0;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.ConfirmDialog strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.ConfirmDialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dangerButton {
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--danger) 50%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: var(--danger);
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease);
+}
+
+.dangerButton:hover {
+  border-color: var(--danger);
+}
+
+/* Notices */
+.Notices {
+  position: fixed;
+  right: 16px;
+  bottom: 40px;
+  z-index: 1400;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(420px, calc(100vw - 32px));
+}
+
+.Notices > div {
+  display: contents;
+}
+
+.Notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background-color: var(--surface-raised);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: noticeIn 160ms var(--ease);
+}
+
+.Notice--error {
+  border-color: color-mix(in srgb, var(--danger) 45%, transparent);
+}
+
+.Notice-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Notice strong {
+  font-weight: 500;
+}
+
+.Notice-action {
+  padding: 4px 8px;
+  border: none;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--accent);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.Notice-action:hover {
+  background-color: var(--hover);
+}
+
+.Notice-close {
+  height: 24px;
+  min-width: 24px;
+  font-size: 16px;
+}
+
+@keyframes noticeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }

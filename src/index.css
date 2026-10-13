@@ -1,56 +1,195 @@
-::-webkit-scrollbar {
-  width: 8px;
-}
+/* Design tokens. electron/main.js and src/theme.js repeat a few of these
+   colours for the native titlebar and Material UI; keep them in sync. */
+:root {
+  --bg: #111318;
+  --surface: #161920;
+  --surface-raised: #1a1d24;
+  --hover: rgba(226, 229, 235, 0.045);
+  --pressed: rgba(226, 229, 235, 0.08);
+  --border: #262a33;
+  --border-strong: #343a46;
 
-::-webkit-scrollbar-track {
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  background-color: transparent;
-  border-color: transparent;
-}
+  --text: #e2e5eb;
+  --text-muted: #9299a6;
+  --text-faint: #7d8494;
+  --danger: #e8868c;
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  background-clip: padding-box;
-  border-width: 2px;
-  border-style: solid;
-  border-color: transparent;
-  border-radius: 12px;
+  /* Set from Settings → Appearance by applyAppearance() in src/settings.js. */
+  --accent: #79c8d5;
+  --font-family: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas,
+    Menlo, monospace;
+  --editor-font-size: 15px;
+  --font-ligatures: normal;
+
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-line: color-mix(in srgb, var(--accent) 45%, transparent);
+
+  --radius: 6px;
+  --radius-lg: 10px;
+  --titlebar-height: 36px;
+  --sidebar-width: 288px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --fast: 120ms;
+
+  color-scheme: dark;
 }
 
 * {
   user-select: none;
 }
 
-html {
-  color-scheme: dark;
+input,
+textarea {
+  user-select: text;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 body {
   margin: 0;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #121212;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  overflow: hidden;
+  color: var(--text);
+  background-color: var(--bg);
+  font-family: var(--font-family);
+  font-size: 13px;
+  line-height: 1.5;
+  font-variant-ligatures: var(--font-ligatures);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  font-variant-ligatures: inherit;
 }
 
-/* Material UI v4 wrapped button text in a label span, and the app's button
-   styling (lowercase text, 18px tall) was applied to that span. v5+ no longer
-   renders it, so buttons wrap their text in this class instead. */
-.buttonLabel {
-  width: 100%;
-  display: inherit;
-  align-items: inherit;
-  justify-content: inherit;
-  text-transform: lowercase;
-  padding-top: 1px;
-  height: 18px !important;
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-line);
+  outline-offset: -2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(226, 229, 235, 0.1);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(226, 229, 235, 0.18);
+}
+
+/* A borderless icon or text button, used across the app. */
+.ghostButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+
+.ghostButton:hover {
+  background-color: var(--hover);
+  color: var(--text);
+}
+
+.ghostButton:active,
+.ghostButton[aria-expanded="true"],
+.ghostButton[aria-pressed="true"] {
+  background-color: var(--pressed);
+  color: var(--text);
+}
+
+.ghostButton:disabled {
+  opacity: 0.4;
+  cursor: default;
+  background: transparent;
+}
+
+/* An outlined button for the main call to action in empty states. */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+
+.primaryButton:hover {
+  border-color: var(--accent);
+}
+
+kbd {
+  font: inherit;
+  font-size: 11px;
+  padding: 1px 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+/* Shared menu item details. */
+.menuShortcut {
+  margin-left: auto;
+  padding-left: 16px;
+  border: none;
+  color: var(--text-faint);
+}
+
+.menuDanger {
+  color: var(--danger) !important;
 }
