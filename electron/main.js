@@ -8,7 +8,7 @@ import {
 } from "electron";
 import path from "node:path";
 
-import { createNotesStore } from "./notesStore.js";
+import { createNotesStore, createSettingsStore } from "./notesStore.js";
 
 // Set by `npm start` to the Vite dev server; otherwise the built renderer is
 // loaded from build/.
@@ -22,10 +22,11 @@ if (process.env.LITENOTE_USER_DATA_DIR) {
 Menu.setApplicationMenu(null);
 nativeTheme.themeSource = "dark";
 
-// Keep in sync with the titlebar height and colours in src/Titlebar/style.css.
+// Keep in sync with the titlebar height and the colour tokens in src/index.css.
 const TITLEBAR_HEIGHT = 36;
-const BACKGROUND = "#121212";
-const TITLEBAR_BACKGROUND = "#1e1e1e";
+const BACKGROUND = "#111318";
+const TITLEBAR_BACKGROUND = "#111318";
+const TITLEBAR_SYMBOLS = "#9299a6";
 
 // Use each platform's own window controls: traffic lights on macOS, and the
 // system minimise/maximise/close overlay on Windows and Linux.
@@ -36,7 +37,7 @@ const titleBarOptions =
         titleBarStyle: "hidden",
         titleBarOverlay: {
           color: TITLEBAR_BACKGROUND,
-          symbolColor: "#e0e0e0",
+          symbolColor: TITLEBAR_SYMBOLS,
           height: TITLEBAR_HEIGHT,
         },
       };
@@ -49,8 +50,10 @@ let mainWindow = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 560,
+    width: 1000,
+    height: 660,
+    minWidth: 420,
+    minHeight: 320,
     icon: icon,
     backgroundColor: BACKGROUND,
     ...titleBarOptions,
@@ -69,15 +72,23 @@ function createWindow() {
   mainWindow.on("closed", () => (mainWindow = null));
 }
 
-function registerIpcHandlers(store) {
-  ipcMain.handle("notes:load", () => store.load());
-  ipcMain.handle("notes:save", (_event, data) => store.save(data));
+function registerIpcHandlers(stores) {
+  for (const [name, store] of Object.entries(stores)) {
+    ipcMain.handle(`${name}:load`, () => store.load());
+    ipcMain.handle(`${name}:save`, (_event, data) => store.save(data));
+  }
 }
 
+let stores = {};
+let quitting = false;
+
 app.whenReady().then(() => {
-  registerIpcHandlers(
-    createNotesStore(path.join(app.getPath("userData"), "notes.json"))
-  );
+  const userData = app.getPath("userData");
+  stores = {
+    notes: createNotesStore(path.join(userData, "notes.json")),
+    settings: createSettingsStore(path.join(userData, "settings.json")),
+  };
+  registerIpcHandlers(stores);
   createWindow();
 
   app.on("activate", () => {
@@ -85,6 +96,17 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+});
+
+// The page saves its last edits as the window closes; let those writes reach
+// the disk before the process exits.
+app.on("will-quit", (event) => {
+  if (quitting) return;
+  event.preventDefault();
+  quitting = true;
+  Promise.all(Object.values(stores).map((store) => store.flush())).finally(() =>
+    app.quit()
+  );
 });
 
 app.on("window-all-closed", () => {

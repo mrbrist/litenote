@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { createNotesStore } from "./notesStore.js";
+import { createNotesStore, createSettingsStore } from "./notesStore.js";
 
 let dir;
 let file;
@@ -54,5 +54,31 @@ describe("createNotesStore", () => {
     await fs.mkdir(path.dirname(file), { recursive: true });
     await fs.writeFile(file, "{ not json");
     await expect(createNotesStore(file).load()).rejects.toThrow(SyntaxError);
+  });
+});
+
+describe("flush", () => {
+  it("waits for queued writes to finish", async () => {
+    const store = createNotesStore(file);
+    store.save(notes);
+    await store.flush();
+    expect(JSON.parse(await fs.readFile(file, "utf8"))).toEqual(notes);
+  });
+
+  it("resolves even when a write failed", async () => {
+    const store = createNotesStore(file);
+    store.save({ toJSON: () => { throw new Error("boom"); } }).catch(() => {});
+    await expect(store.flush()).resolves.toBeUndefined();
+  });
+});
+
+describe("createSettingsStore", () => {
+  it("loads empty settings when no file exists yet", async () => {
+    expect(await createSettingsStore(file).load()).toEqual({});
+  });
+
+  it("saves settings and loads them back", async () => {
+    await createSettingsStore(file).save({ font: "fira-code" });
+    expect(await createSettingsStore(file).load()).toEqual({ font: "fira-code" });
   });
 });

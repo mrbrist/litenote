@@ -10,4 +10,8 @@ contextBridge.exposeInMainWorld("litenote", {
     load: () => ipcRenderer.invoke("notes:load"),
     save: (data) => ipcRenderer.invoke("notes:save", data),
   },
+  settings: {
+    load: () => ipcRenderer.invoke("settings:load"),
+    save: (data) => ipcRenderer.invoke("settings:save", data),
+  },
 });
